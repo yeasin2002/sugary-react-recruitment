@@ -1,14 +1,17 @@
 "use client";
 
+import ProfileSkeleton from "@/components/skelton/profile-skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAuth } from "@/lib/auth-context";
 import { getImg } from "@/lib/getImg";
-import { useState } from "react";
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function UserProfile() {
   const { user } = useAuth();
   const avatarUrl = getImg(user?.Avatar);
+  const router = useRouter();
 
   const teamMembers = [
     {
@@ -29,15 +32,22 @@ export default function UserProfile() {
     },
   ];
 
-  if (!user) return <div>Loading</div>;
+  if (!user) return <ProfileSkeleton />;
 
   return (
     <div className="container mx-auto">
-      <div className="flex h-screen w-full overflow-hidden ">
-        {/* Left side - Photo with yellow background */}
-        <div className="relative w-1/2 bg-yellow-300 flex items-center justify-center">
-          <div className="absolute top-0 right-0 h-16 w-16 bg-yellow-400"></div>
-          <div className="absolute bottom-0 left-0 h-16 w-16 bg-yellow-400"></div>
+      <button
+        className="flex items-center justify-center mt-2"
+        onClick={() => router.back()}
+      >
+        <ArrowLeft />
+        <span>Go Back</span>
+      </button>
+
+      <div className="flex h-screen w-full overflow-hidden mt-11">
+        <div className="relative w-1/2 bg-yellow-300 flex items-center justify-center h-full md:h-[50rem]">
+          <div className="absolute top-0 right-0 size-16 bg-yellow-400"></div>
+          <div className="absolute bottom-0 left-0 size-16 bg-yellow-400"></div>
           <div className="w-4/5 h-4/5 flex items-center justify-center">
             <Avatar className="w-full h-full rounded-none">
               <AvatarImage
@@ -53,8 +63,7 @@ export default function UserProfile() {
             </Avatar>
           </div>
         </div>
-        {/* Right side - User information */}
-        <div className="w-1/2 bg-white p-12 flex items-center">
+        <div className="w-1/2 bg-white p-12 flex items-center ">
           <Card className="w-full border-none shadow-none">
             <CardContent className="p-0 space-y-10">
               {/* Name section */}
