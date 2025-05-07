@@ -1,11 +1,11 @@
 'use client';
 
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useMaterials } from "@/hooks/use-materials";
+import { AlertCircle } from "lucide-react";
 import { useEffect, useRef, useState } from 'react';
 import { MaterialCard } from './material-card';
-import { MaterialsSkeleton } from './materials-skeleton';
-import { useMaterials } from '@/hooks/use-materials';
-import { AlertCircle } from 'lucide-react';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { MaterialsSkeleton } from "./materials-skeleton";
 
 export function MaterialsList() {
   const { 
