@@ -103,3 +103,12 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
+/*
+Demo credentials helper 
+<div className="text-center text-sm text-muted-foreground mt-4">
+<p>Demo credentials:</p>
+<p>Email: react@test.com</p>
+<p>Password: playful009</p>
+</div>
+*/
