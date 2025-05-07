@@ -1,13 +1,14 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { Providers } from './providers';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { Providers } from "./providers";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Sugary - Materials Dashboard',
-  description: 'A beautiful materials dashboard for Sugary',
+  title: "Sugary",
+  description:
+    "You can get everything you want if you work hard, trust the process, and stick to the plan.",
 };
 
 export default function RootLayout({
