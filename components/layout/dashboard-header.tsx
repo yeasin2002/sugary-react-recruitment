@@ -1,36 +1,41 @@
 'use client';
 
-import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Moon, Sun, LogOut, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/lib/auth-context";
+import { LogOut, Moon, Sun, User } from "lucide-react";
+import { useTheme } from "next-themes";
 import { Logo } from "./logo";
 
 export function DashboardHeader() {
   const { theme, setTheme } = useTheme();
   const { user, logout } = useAuth();
-  
-  const avatarUrl = user?.Avatar ? 
-    `https://d1wh1xji6f82aw.cloudfront.net/${user.Avatar}` : 
-    undefined;
+
+  const avatarUrl = user?.Avatar
+    ? `https://d1wh1xji6f82aw.cloudfront.net/${user.Avatar}`
+    : undefined;
 
   const userInitials = user?.FullName
-    ? user.FullName.split(' ')
-        .map(name => name[0])
-        .join('')
+    ? user.FullName.split(" ")
+        .map((name) => name[0])
+        .join("")
         .toUpperCase()
-    : 'U';
+    : "U";
 
   return (
-    <header className="border-b bg-card sticky top-0 z-10">
-      <div className="container flex h-16 items-center justify-between px-4 md:px-6">
+    <header className="border-b bg-card  top-0 z-10  flex items-center justify-center">
+      <header className="container flex h-16 items-center justify-between px-4 md:px-6">
         <div className="flex items-center gap-2">
           <Logo className="h-8 w-8 text-primary" />
           <span className="font-semibold text-lg">Sugary</span>
         </div>
-        
+
         <div className="flex items-center gap-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -54,12 +59,12 @@ export function DashboardHeader() {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          
+
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="relative h-9 w-9 rounded-full">
                 <Avatar className="h-9 w-9">
-                  <AvatarImage src={avatarUrl} alt={user?.FullName || 'User'} />
+                  <AvatarImage src={avatarUrl} alt={user?.FullName || "User"} />
                   <AvatarFallback>{userInitials}</AvatarFallback>
                 </Avatar>
               </Button>
@@ -80,7 +85,7 @@ export function DashboardHeader() {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-      </div>
+      </header>
     </header>
   );
 }
