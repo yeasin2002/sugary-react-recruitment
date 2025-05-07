@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -31,10 +31,7 @@ export function DashboardHeader() {
   return (
     <header className="border-b bg-card  top-0 z-10  flex items-center justify-center">
       <header className="container flex h-16 items-center justify-between px-4 md:px-6">
-        <div className="flex items-center gap-2">
-          <Logo className="h-8 w-8 text-primary" />
-          <span className="font-semibold text-lg">Sugary</span>
-        </div>
+        <Logo />
 
         <div className="flex items-center gap-4">
           <DropdownMenu>
