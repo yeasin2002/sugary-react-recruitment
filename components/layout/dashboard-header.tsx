@@ -9,17 +9,18 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/lib/auth-context";
+import { getImg } from "@/lib/getImg";
 import { LogOut, Moon, Sun, User } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
 import { Logo } from "./logo";
 
 export function DashboardHeader() {
   const { theme, setTheme } = useTheme();
   const { user, logout } = useAuth();
+  const router = useRouter();
 
-  const avatarUrl = user?.Avatar
-    ? `https://d1wh1xji6f82aw.cloudfront.net/${user.Avatar}`
-    : undefined;
+  const avatarUrl = getImg(user?.Avatar);
 
   const userInitials = user?.FullName
     ? user.FullName.split(" ")
@@ -71,7 +72,10 @@ export function DashboardHeader() {
                 <p className="text-sm font-medium">{user?.FullName}</p>
                 <p className="text-xs text-muted-foreground">{user?.Email}</p>
               </div>
-              <DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => router.push("/dashboard/profile")}
+                className="cursor-pointer"
+              >
                 <User className="mr-2 h-4 w-4" />
                 <span>Profile</span>
               </DropdownMenuItem>

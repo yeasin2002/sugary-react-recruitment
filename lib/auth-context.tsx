@@ -1,8 +1,19 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { User, AuthStatus } from './types';
-import { loginUser, refreshToken, saveAuthToStorage, clearAuthFromStorage } from './api';
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import {
+  clearAuthFromStorage,
+  loginUser,
+  refreshToken,
+  saveAuthToStorage,
+} from "./api";
+import { AuthStatus, User } from "./types";
 
 interface AuthContextType {
   user: User | null;
