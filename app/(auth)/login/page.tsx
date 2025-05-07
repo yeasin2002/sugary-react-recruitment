@@ -40,6 +40,7 @@ const LoginPage = () => {
         description: "You have successfully logged in.",
         variant: "default",
       });
+
       router.push("/dashboard");
     } catch (error) {
       console.error("Login error:", error);
@@ -48,6 +49,20 @@ const LoginPage = () => {
         description: "Invalid credentials. Please try again.",
         variant: "destructive",
       });
+
+      setTimeout(() => {
+        toast({
+          title: "Demo credentials:",
+          description: (
+            <div className="flex flex-col">
+              UserName: react@test.com
+              <br />
+              Password: playful009
+            </div>
+          ),
+          variant: "default",
+        });
+      }, 2000);
     } finally {
       setIsLoading(false);
     }
