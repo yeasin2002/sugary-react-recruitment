@@ -1,7 +1,7 @@
 import { Eye } from "lucide-react";
 import Link from "next/link";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   return (
     <div className="flex-grow flex flex-col justify-center max-w-xl mx-auto w-full  p-8 md:p-12 lg:py-16  ">
       <h1 className="text-4xl md:text-5xl font-serif font-bold mb-3 text-center">
@@ -110,4 +110,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
