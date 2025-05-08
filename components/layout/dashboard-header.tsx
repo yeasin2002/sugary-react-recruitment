@@ -29,6 +29,10 @@ export function DashboardHeader() {
         .toUpperCase()
     : "U";
 
+  const logoutUser = () => {
+    logout();
+    return router.push("/login");
+  };
   return (
     <header className="border-b bg-card  top-0 z-10  flex items-center justify-center">
       <header className="container flex h-16 items-center justify-between px-4 md:px-6">
@@ -79,7 +83,7 @@ export function DashboardHeader() {
                 <User className="mr-2 h-4 w-4" />
                 <span>Profile</span>
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={logout}>
+              <DropdownMenuItem onClick={logoutUser}>
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Log out</span>
               </DropdownMenuItem>

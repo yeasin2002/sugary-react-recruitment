@@ -1,8 +1,8 @@
-import Image from 'next/image';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Material } from '@/lib/types';
-import { useAuth } from '@/lib/auth-context';
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { useAuth } from "@/lib/auth-context";
+import { Material } from "@/lib/types";
+import Image from "next/image";
 
 interface MaterialCardProps {
   material: Material;
@@ -10,9 +10,11 @@ interface MaterialCardProps {
 
 export function MaterialCard({ material }: MaterialCardProps) {
   const { user } = useAuth();
-  const currency = user?.currency;
+
+  const currency = user?.Currency;
   const imageUrl = `https://d1wh1xji6f82aw.cloudfront.net/${material.CoverPhoto}`;
-  const fallbackImageUrl = 'https://images.pexels.com/photos/1797393/pexels-photo-1797393.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
+  const fallbackImageUrl =
+    "https://images.pexels.com/photos/1797393/pexels-photo-1797393.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
 
   return (
     <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg">
@@ -45,7 +47,10 @@ export function MaterialCard({ material }: MaterialCardProps) {
       <CardFooter className="p-4 pt-0 flex justify-between items-center">
         <div className="flex flex-col">
           <span className="text-sm text-muted-foreground">Price</span>
-          <span className="font-semibold">{currency?.Symbol}{material.SalesPriceInUsd.toFixed(2)}</span>
+          <span className="font-semibold">
+            {currency?.Symbol}
+            {material.SalesPriceInUsd.toFixed(2)}
+          </span>
         </div>
         <span className="text-xs text-muted-foreground">
           Local: {material.SalesPrice.toFixed(2)}
