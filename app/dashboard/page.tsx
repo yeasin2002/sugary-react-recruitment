@@ -1,10 +1,18 @@
 "use client";
 
 import { MaterialsList } from "@/components/dashboard/materials-list";
-import { Separator } from "@/components/ui/separator";
 import { useAuth } from "@/lib/auth-context";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Suspense } from "react";
 
 export default function Dashboard() {
   const { user, status } = useAuth();
@@ -27,15 +35,20 @@ export default function Dashboard() {
   }
 
   return (
-    <main className="container mx-auto py-6 px-4 md:px-6">
-      <div className="flex flex-col space-y-4">
-        <h1 className="text-3xl font-bold">Materials</h1>
-        <p className="text-muted-foreground">
-          Browse through our collection of materials
-        </p>
-        <Separator className="my-2" />
-        <MaterialsList />
-      </div>
-    </main>
+    <div className="container mx-auto py-6">
+      <Card className="border-none shadow-none">
+        <CardHeader>
+          <CardTitle>Materials Dashboard</CardTitle>
+          <CardDescription>
+            Browse through our collection of materials
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Suspense fallback={<p>Loading materials...</p>}>
+            <MaterialsList />
+          </Suspense>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

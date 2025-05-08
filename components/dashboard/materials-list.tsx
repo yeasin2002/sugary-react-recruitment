@@ -1,96 +1,83 @@
-'use client';
+"use client";
 
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { useMaterials } from "@/hooks/use-materials";
-import { AlertCircle } from "lucide-react";
-import { useEffect, useRef, useState } from 'react';
-import { MaterialCard } from './material-card';
-import { MaterialsSkeleton } from "./materials-skeleton";
+import { fetchMaterials } from "@/helper/fetch-materials";
+import type { Material } from "@/lib/types";
+import { useCallback, useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
+import { MaterialCard } from "./material-card";
 
 export function MaterialsList() {
-  const { 
-    materials, 
-    isLoading, 
-    error, 
-    loadMore, 
-    hasMore, 
-    totalCount 
-  } = useMaterials();
-  
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const observerTarget = useRef(null);
+  const [materials, setMaterials] = useState<Material[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [skip, setSkip] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
+  const limit = 20;
+
+  const { ref, inView } = useInView({
+    threshold: 0,
+    rootMargin: "0px 0px 500px 0px",
+  });
+
+  const MoreMaterialsLoaderFn = async () => {
+    if (isLoading || !hasMore) return;
+
+    setIsLoading(true);
+    try {
+      const response = await fetchMaterials(skip, limit);
+
+      if (response.Materials.length === 0) {
+        setHasMore(false);
+        return;
+      }
+
+      setMaterials((prev) => [...prev, ...response.Materials]);
+      setSkip((prevSkip) => prevSkip + limit);
+
+      if (response.RemainingCount <= 0) {
+        setHasMore(false);
+      }
+    } catch (error) {
+      console.error("Error loading materials:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const loadMoreMaterials = useCallback(MoreMaterialsLoaderFn, [
+    hasMore,
+    isLoading,
+    skip,
+  ]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      async (entries) => {
-        if (entries[0].isIntersecting && hasMore && !isLoading && !isLoadingMore) {
-          setIsLoadingMore(true);
-          await loadMore();
-          setIsLoadingMore(false);
-        }
-      },
-      { threshold: 0.5 }
-    );
+    loadMoreMaterials();
+  }, [loadMoreMaterials]);
 
-    const currentObserverTarget = observerTarget.current;
-
-    if (currentObserverTarget) {
-      observer.observe(currentObserverTarget);
+  useEffect(() => {
+    if (inView) {
+      loadMoreMaterials();
     }
-
-    return () => {
-      if (currentObserverTarget) {
-        observer.unobserve(currentObserverTarget);
-      }
-    };
-  }, [hasMore, isLoading, isLoadingMore, loadMore]);
-
-  if (error) {
-    return (
-      <Alert variant="destructive">
-        <AlertCircle className="h-4 w-4" />
-        <AlertTitle>Error</AlertTitle>
-        <AlertDescription>
-          Failed to load materials. Please try again later.
-        </AlertDescription>
-      </Alert>
-    );
-  }
+  }, [inView, loadMoreMaterials]);
 
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {isLoading && materials.length === 0 ? (
-          <MaterialsSkeleton count={8} />
-        ) : (
-          <>
-            {materials.map((material) => (
-              <MaterialCard key={material.Id} material={material} />
-            ))}
-            {isLoadingMore && <MaterialsSkeleton count={4} />}
-          </>
-        )}
+    <div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {materials.map((material) => (
+          <MaterialCard key={material.Id} material={material} />
+        ))}
       </div>
-      
-      {materials.length > 0 && (
-        <div className="text-center text-sm text-muted-foreground py-4">
-          Showing {materials.length} of {totalCount} materials
+
+      {isLoading && (
+        <div className="flex justify-center my-8">
+          <div className="animate-pulse text-center">
+            Loading more materials...
+          </div>
         </div>
       )}
-      
-      {hasMore && (
-        <div 
-          ref={observerTarget} 
-          className="h-8 flex items-center justify-center"
-        >
-          {isLoadingMore && (
-            <div className="animate-spin h-5 w-5 border-2 border-primary border-t-transparent rounded-full"></div>
-          )}
-        </div>
-      )}
-      
+
+      {!isLoading && hasMore && <div ref={ref} className="h-10" />}
+
       {!hasMore && materials.length > 0 && (
-        <div className="text-center text-sm text-muted-foreground py-4">
+        <div className="text-center my-8 text-gray-500">
           No more materials to load
         </div>
       )}

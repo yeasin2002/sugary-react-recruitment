@@ -1,60 +1,48 @@
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { useAuth } from "@/lib/auth-context";
-import { Material } from "@/lib/types";
+import {
+    Card,
+    CardContent,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
+import { getImg } from "@/lib/getImg";
+import type { Material } from "@/lib/types";
 import Image from "next/image";
 
-interface MaterialCardProps {
-  material: Material;
-}
-
-export function MaterialCard({ material }: MaterialCardProps) {
-  const { user } = useAuth();
-
-  const currency = user?.Currency;
-  const imageUrl = `https://d1wh1xji6f82aw.cloudfront.net/${material.CoverPhoto}`;
-  const fallbackImageUrl =
-    "https://images.pexels.com/photos/1797393/pexels-photo-1797393.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
-
+export function MaterialCard({ material }: { material: Material }) {
   return (
-    <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg">
-      <div className="relative h-48 w-full overflow-hidden">
+    <Card className="overflow-hidden h-full flex flex-col">
+      <div className="relative h-48 w-full">
         <Image
-          src={imageUrl}
+          src={getImg(material.CoverPhoto)}
           alt={material.Title}
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover transition-transform duration-300 hover:scale-105"
-          onError={(e) => {
-            // Fallback if image fails to load
-            (e.target as HTMLImageElement).src = fallbackImageUrl;
-          }}
+          className="object-cover"
+          onError={(e) =>
+            (e.currentTarget.src = "/placeholder.svg?height=200&width=300")
+          }
         />
       </div>
-      <CardContent className="p-4">
-        <div className="flex flex-col space-y-2">
-          <div className="flex items-start justify-between">
-            <h3 className="font-medium line-clamp-1">{material.Title}</h3>
-          </div>
-          {material.VariantTitle && (
-            <Badge variant="outline" className="w-fit">
-              {material.VariantTitle}
-            </Badge>
-          )}
-          <p className="text-sm text-muted-foreground">{material.BrandName}</p>
-        </div>
+      <CardHeader className="pb-2">
+        <CardTitle className="text-lg">{material.Title}</CardTitle>
+      </CardHeader>
+      <CardContent className="pb-2 flex-grow">
+        <p className="text-sm text-muted-foreground">{material.BrandName}</p>
+        {material.VariantTitle && (
+          <p className="text-xs text-muted-foreground mt-1">
+            Variant: {material.VariantTitle}
+          </p>
+        )}
       </CardContent>
-      <CardFooter className="p-4 pt-0 flex justify-between items-center">
-        <div className="flex flex-col">
-          <span className="text-sm text-muted-foreground">Price</span>
-          <span className="font-semibold">
-            {currency?.Symbol}
-            {material.SalesPriceInUsd.toFixed(2)}
-          </span>
+      <CardFooter className="pt-0">
+        <div className="flex justify-between w-full">
+          <p className="font-semibold">
+            ${material.SalesPriceInUsd.toFixed(2)}
+          </p>
+          <p className="text-muted-foreground">
+            {material.SalesPrice.toFixed(2)} BDT
+          </p>
         </div>
-        <span className="text-xs text-muted-foreground">
-          Local: {material.SalesPrice.toFixed(2)}
-        </span>
       </CardFooter>
     </Card>
   );
