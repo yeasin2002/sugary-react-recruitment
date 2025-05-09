@@ -13,7 +13,7 @@ export default function Dashboard() {
   const router = useRouter();
 
   useEffect(() => {
-    if (status === "unauthenticated") router.push("/");
+    if (status === "unauthenticated") router.push("/login");
   }, [status, router]);
 
   if (status === "loading") {

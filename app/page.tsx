@@ -42,7 +42,12 @@ const transitionVariants = {
 
 export default function HeroSection() {
   return (
-    <div className="relative">
+    <div>
+      <Spotlight
+        className="-top-40 left-0 md:-top-20 md:left-60"
+        fill="white"
+      />
+
       <HeroHeader />
       <main className="overflow-hidden">
         <div
@@ -121,11 +126,6 @@ export default function HeroSection() {
           </div>
         </section>
       </main>
-
-      <Spotlight
-        className="-top-40 left-0 md:-top-20 md:left-60"
-        fill="white"
-      />
     </div>
   );
 }
