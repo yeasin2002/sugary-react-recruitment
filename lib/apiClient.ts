@@ -70,10 +70,7 @@ api.interceptors.response.use(
         return new Promise((resolve, reject) => {
           failedQueue.push({
             resolve: (token: string) => {
-              originalRequest.headers = {
-                ...originalRequest.headers,
-                Authorization: `Bearer ${token}`,
-              };
+              originalRequest.headers.set("Authorization", `Bearer ${token}`);
               resolve(api(originalRequest));
             },
             reject,
@@ -98,11 +95,10 @@ api.interceptors.response.use(
         setTokens(newAccessToken, newRefreshToken);
         processQueue(null, newAccessToken);
 
-        originalRequest.headers = {
-          ...originalRequest.headers,
-          Authorization: `Bearer ${newAccessToken}`,
-        };
-
+        originalRequest.headers.set(
+          "Authorization",
+          `Bearer ${newAccessToken}`
+        );
         return api(originalRequest);
       } catch (err) {
         processQueue(err as AxiosError, null);
