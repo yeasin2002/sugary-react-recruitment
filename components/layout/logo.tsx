@@ -1,6 +1,5 @@
-import logoImg from "@/assets/Sugary-logo.png";
+import logoImg from "@/assets/new-logo.jpg";
 import { cn } from "@/lib/utils";
-import { CandyIcon } from "lucide-react";
 import Image from "next/image";
 
 interface LogoProps {
@@ -13,7 +12,7 @@ export function Logo({ className }: LogoProps) {
       <Image
         src={logoImg}
         alt="Logo"
-        className={className}
+        className={cn(`rounded-full`, className)}
         width={40}
         height={40}
         priority

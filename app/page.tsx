@@ -15,6 +15,7 @@ import gift2 from "@/assets/gifts/gift-2.webp";
 import gift3 from "@/assets/gifts/gift-3.webp";
 import gift4 from "@/assets/gifts/gift-4.jpeg";
 import gift5 from "@/assets/gifts/gift-5.jpeg";
+import { Spotlight } from "@/components/ui/custom";
 import { MoveRight } from "lucide-react";
 
 const images = [gift1, gift2, gift3, gift4, gift5];
@@ -41,7 +42,7 @@ const transitionVariants = {
 
 export default function HeroSection() {
   return (
-    <>
+    <div className="relative">
       <HeroHeader />
       <main className="overflow-hidden">
         <div
@@ -120,6 +121,11 @@ export default function HeroSection() {
           </div>
         </section>
       </main>
-    </>
+
+      <Spotlight
+        className="-top-40 left-0 md:-top-20 md:left-60"
+        fill="white"
+      />
+    </div>
   );
 }

@@ -7,6 +7,7 @@ import { useScroll } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { Logo } from "../layout/logo";
 
 const menuItems = [
   { name: "Features", href: "#link" },
@@ -45,7 +46,7 @@ export const HeroHeader = () => {
                 aria-label="home"
                 className="flex items-center space-x-2"
               >
-                <Image src={logo} alt="logo" className="size-10 rounded-full" />
+                <Logo />
               </Link>
 
               <button

@@ -12,6 +12,7 @@ import { useAuth } from "@/lib/auth-context";
 import { getImg } from "@/lib/getImg";
 import { LogOut, Moon, Sun, User } from "lucide-react";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Logo } from "./logo";
 
@@ -36,7 +37,13 @@ export function DashboardHeader() {
   return (
     <header className="border-b bg-card  top-0 z-10  flex items-center justify-center">
       <header className="container flex h-16 items-center justify-between px-4 md:px-6">
-        <Logo />
+        <Link
+          href="/"
+          aria-label="home"
+          className="flex items-center space-x-2"
+        >
+          <Logo />
+        </Link>
 
         <div className="flex items-center gap-4">
           <DropdownMenu>
