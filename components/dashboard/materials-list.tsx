@@ -48,9 +48,6 @@ export function MaterialsList() {
     skip,
   ]);
 
-  useEffect(() => {
-    loadMoreMaterials();
-  }, [loadMoreMaterials]);
 
   useEffect(() => {
     if (inView) {
@@ -60,7 +57,7 @@ export function MaterialsList() {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 min-h-screen">
         {materials.map((material) => (
           <MaterialCard key={material.Id} material={material} />
         ))}

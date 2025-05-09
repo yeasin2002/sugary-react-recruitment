@@ -1,7 +1,6 @@
 import type { MaterialsResponse } from "@/types";
 
 const API_BASE_URL = "https://sugarytestapi.azurewebsites.net";
-const IMAGE_BASE_URL = "https://d1wh1xji6f82aw.cloudfront.net";
 
 export async function fetchMaterials(
   skip = 0,
@@ -44,8 +43,4 @@ export async function fetchMaterials(
     console.error("Error fetching materials:", error);
     throw error;
   }
-}
-
-export function getImageUrl(path: string): string {
-  return `${IMAGE_BASE_URL}/${path}`;
 }

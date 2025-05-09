@@ -30,9 +30,7 @@ export default function Dashboard() {
     );
   }
 
-  if (!user) {
-    return null;
-  }
+  if (!user) return null;
 
   return (
     <div className="container mx-auto py-6">

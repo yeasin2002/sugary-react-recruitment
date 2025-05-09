@@ -1,9 +1,9 @@
 import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
 import { getImg } from "@/lib/getImg";
 import type { Material } from "@/lib/types";
@@ -16,11 +16,9 @@ export function MaterialCard({ material }: { material: Material }) {
         <Image
           src={getImg(material.CoverPhoto)}
           alt={material.Title}
-          fill
           className="object-cover"
-          onError={(e) =>
-            (e.currentTarget.src = "/placeholder.svg?height=200&width=300")
-          }
+          width={400}
+          height={400}
         />
       </div>
       <CardHeader className="pb-2">
