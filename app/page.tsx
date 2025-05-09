@@ -1,19 +1,23 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import Link from "next/link";
 
-import { AnimatedGroup } from "@/components/homepage/animated-group";
-import { HeroHeader } from "@/components/homepage/hero-headers";
-import { TextEffect } from "@/components/homepage/text-effect";
+import {
+  AnimatedGroup,
+  HeroHeader,
+  HeroProductShow,
+  TextEffect,
+} from "@/components/homepage";
 
 import gift1 from "@/assets/gifts/gift-1.webp";
 import gift2 from "@/assets/gifts/gift-2.webp";
 import gift3 from "@/assets/gifts/gift-3.webp";
-import gift4 from "@/assets/gifts/gift-4.webp";
-import gift5 from "@/assets/gifts/gift-5.webp";
-import logo from "@/assets/Sugary-logo.png";
+import gift4 from "@/assets/gifts/gift-4.jpeg";
+import gift5 from "@/assets/gifts/gift-5.jpeg";
+import { MoveRight } from "lucide-react";
+
+const images = [gift1, gift2, gift3, gift4, gift5];
 
 const transitionVariants = {
   item: {
@@ -59,7 +63,7 @@ export default function HeroSection() {
                   as="h1"
                   className="mt-8 max-w-2xl text-balance text-5xl font-medium md:text-6xl lg:mt-16"
                 >
-                  Build and Ship 10x faster with NS
+                  The worlds first personalized gifting app
                 </TextEffect>
                 <TextEffect
                   per="line"
@@ -69,51 +73,9 @@ export default function HeroSection() {
                   as="p"
                   className="mt-8 max-w-2xl text-pretty text-lg"
                 >
-                  Tailwindcss highly customizable components for building modern
-                  websites and applications that look and feel the way you mean
-                  it.
+                  Your everyday gifting app that saves your time. 👌🏽 Customize
+                  your 𝗚𝗶𝗳𝘁 with your budget🔥
                 </TextEffect>
-
-                <AnimatedGroup
-                  variants={{
-                    container: {
-                      visible: {
-                        transition: {
-                          staggerChildren: 0.05,
-                          delayChildren: 0.75,
-                        },
-                      },
-                    },
-                    ...transitionVariants,
-                  }}
-                  className="mt-12 flex items-center gap-2"
-                >
-                  <div
-                    key={1}
-                    className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
-                  >
-                    <Button
-                      asChild
-                      size="lg"
-                      className="rounded-xl px-5 text-base"
-                    >
-                      <Link href="#link">
-                        <span className="text-nowrap">Start Building</span>
-                      </Link>
-                    </Button>
-                  </div>
-                  <Button
-                    key={2}
-                    asChild
-                    size="lg"
-                    variant="ghost"
-                    className="h-10.5 rounded-xl px-5 text-base"
-                  >
-                    <Link href="#link">
-                      <span className="text-nowrap">Request a demo</span>
-                    </Link>
-                  </Button>
-                </AnimatedGroup>
               </div>
             </div>
             <AnimatedGroup
@@ -134,22 +96,25 @@ export default function HeroSection() {
                   aria-hidden
                   className="bg-linear-to-b to-background absolute inset-0 z-10 from-transparent from-35%"
                 />
-                <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-5xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
-                  <Image
-                    className="bg-background aspect-15/8 relative hidden rounded-2xl dark:block"
-                    src={gift1}
-                    alt="app screen"
-                    width="2700"
-                    height="1440"
-                  />
-                  <Image
-                    className="z-2 border-border/25 aspect-15/8 relative rounded-2xl border dark:hidden"
-                    src={gift1}
-                    alt="app screen"
-                    width="2700"
-                    height="1440"
-                  />
+                <div className="flex justify-center items-center">
+                  {images.map((image, idx) => (
+                    <HeroProductShow key={idx} image={image} />
+                  ))}
                 </div>
+              </div>
+
+              <div className="flex items-center justify-center mt-16">
+                <Button
+                  asChild
+                  size="lg"
+                  className="rounded-full px-5 text-base border border-gray-600 "
+                  variant={"ghost"}
+                >
+                  <Link href="/dashboard" className="text-nowrap gap-x-4">
+                    <span>see more</span>
+                    <MoveRight />
+                  </Link>
+                </Button>
               </div>
             </AnimatedGroup>
           </div>

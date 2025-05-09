@@ -1,19 +1,19 @@
 "use client";
-import { motion, type Variants } from "motion/react";
 import type { ReactNode } from "react";
+import { motion, type Variants } from "motion/react";
 import React from "react";
 
-export type PresetType =
-  | "fade"
-  | "slide"
-  | "scale"
-  | "blur"
-  | "blur-slide"
-  | "zoom"
-  | "flip"
-  | "bounce"
-  | "rotate"
-  | "swing";
+ type PresetType =
+   | "fade"
+   | "slide"
+   | "scale"
+   | "blur"
+   | "blur-slide"
+   | "zoom"
+   | "flip"
+   | "bounce"
+   | "rotate"
+   | "swing";
 
 export type AnimatedGroupProps = {
   children: ReactNode;
