@@ -1,17 +1,11 @@
 "use client";
 
 import { MaterialsList } from "@/components/dashboard/materials-list";
+import { LoadingIcon } from "@/components/ui/custom/loading";
 import { useAuth } from "@/lib/auth-context";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Suspense } from "react";
 
 export default function Dashboard() {
@@ -34,19 +28,29 @@ export default function Dashboard() {
 
   return (
     <div className="container mx-auto py-6">
-      <Card className="border-none shadow-none">
-        <CardHeader>
-          <CardTitle>Materials Dashboard</CardTitle>
-          <CardDescription>
+      <div className="border-none shadow-none space-y-8">
+        <div>
+          <h1 className="text-3xl font-semibold leading-none tracking-tight">
+            Materials Dashboard
+          </h1>
+          <p className="text-sm text-muted-foreground">
             Browse through our collection of materials
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Suspense fallback={<p>Loading materials...</p>}>
+          </p>
+        </div>
+
+        <div>
+          <Suspense
+            fallback={
+              <p>
+                <span>Loading... </span>
+                <LoadingIcon />
+              </p>
+            }
+          >
             <MaterialsList />
           </Suspense>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }

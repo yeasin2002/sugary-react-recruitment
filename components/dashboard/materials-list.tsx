@@ -5,6 +5,7 @@ import type { Material } from "@/lib/types";
 import { useCallback, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { MaterialCard } from "./material-card";
+import { MaterialsSkeleton } from "./materials-skeleton";
 
 export function MaterialsList() {
   const [materials, setMaterials] = useState<Material[]>([]);
@@ -18,7 +19,7 @@ export function MaterialsList() {
     rootMargin: "0px 0px 500px 0px",
   });
 
-  const MoreMaterialsLoaderFn = async () => {
+  const loadMoreMaterials = useCallback(async () => {
     if (isLoading || !hasMore) return;
 
     setIsLoading(true);
@@ -41,13 +42,7 @@ export function MaterialsList() {
     } finally {
       setIsLoading(false);
     }
-  };
-  const loadMoreMaterials = useCallback(MoreMaterialsLoaderFn, [
-    hasMore,
-    isLoading,
-    skip,
-  ]);
-
+  }, [hasMore, isLoading, skip]);
 
   useEffect(() => {
     if (inView) {
@@ -57,17 +52,17 @@ export function MaterialsList() {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 min-h-screen">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 min-h-[80vh]">
         {materials.map((material) => (
           <MaterialCard key={material.Id} material={material} />
         ))}
       </div>
 
       {isLoading && (
-        <div className="flex justify-center my-8">
-          <div className="animate-pulse text-center">
-            Loading more materials...
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">
+          {Array.from({ length: limit }).map((_, index) => (
+            <MaterialsSkeleton key={index} />
+          ))}
         </div>
       )}
 

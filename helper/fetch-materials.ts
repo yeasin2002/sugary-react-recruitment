@@ -14,24 +14,9 @@ export async function fetchMaterials(
 
   const encodedFilter = btoa(JSON.stringify(filter));
 
-  // In a real application, you would store and retrieve the token securely
-  // For this example, we'll use a placeholder token
-  const token = process.env.NEXT_PUBLIC_API_TOKEN;
-  if (!token) {
-    console.warn(
-      "API token not found. Make sure NEXT_PUBLIC_API_TOKEN is set in your environment variables."
-    );
-  }
-
   try {
     const response = await fetch(
-      `${API_BASE_URL}/Materials/GetAll/?filter=${encodedFilter}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
+      `${API_BASE_URL}/Materials/GetAll/?filter=${encodedFilter}`
     );
 
     if (!response.ok) {
