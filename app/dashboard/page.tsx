@@ -29,11 +29,11 @@ export default function Dashboard() {
   return (
     <div className="container mx-auto py-6">
       <div className="border-none shadow-none space-y-8">
-        <div>
-          <h1 className="text-3xl font-semibold leading-none tracking-tight">
+        <div className="space-y-2">
+          <h1 className="text-4xl font-semibold leading-none tracking-tight font-ubuntu">
             Materials Dashboard
           </h1>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-lg text-muted-foreground font-montserrat">
             Browse through our collection of materials
           </p>
         </div>

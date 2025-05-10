@@ -15,7 +15,6 @@ import gift2 from "@/assets/gifts/gift-2.webp";
 import gift3 from "@/assets/gifts/gift-3.webp";
 import gift4 from "@/assets/gifts/gift-4.jpeg";
 import gift5 from "@/assets/gifts/gift-5.jpeg";
-import { Spotlight } from "@/components/ui/custom";
 import { MoveRight } from "lucide-react";
 
 const images = [gift1, gift2, gift3, gift4, gift5];
@@ -43,8 +42,6 @@ const transitionVariants = {
 export default function HeroSection() {
   return (
     <div>
-
-
       <HeroHeader />
       <main className="overflow-hidden">
         <div
@@ -64,7 +61,7 @@ export default function HeroSection() {
                   preset="fade-in-blur"
                   speedSegment={0.3}
                   as="h1"
-                  className="mt-8 max-w-2xl text-balance text-5xl font-medium md:text-6xl lg:mt-16"
+                  className="mt-8 max-w-3xl text-5xl font-medium md:text-6xl lg:mt-16 font-ubuntu"
                 >
                   The worlds first personalized gifting app
                 </TextEffect>
@@ -74,7 +71,7 @@ export default function HeroSection() {
                   speedSegment={0.3}
                   delay={0.5}
                   as="p"
-                  className="mt-8 max-w-2xl text-pretty text-lg"
+                  className="mt-8 max-w-2xl text-pretty text-lg font-montserrat"
                 >
                   Your everyday gifting app that saves your time. 👌🏽 Customize
                   your 𝗚𝗶𝗳𝘁 with your budget🔥

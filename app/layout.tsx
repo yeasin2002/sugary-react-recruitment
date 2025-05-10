@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { fontVariable } from "@/fonts";
 import "./globals.css";
 import { Providers } from "./providers";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Sugary",
@@ -18,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={fontVariable}>
         <Providers>{children}</Providers>
       </body>
     </html>
