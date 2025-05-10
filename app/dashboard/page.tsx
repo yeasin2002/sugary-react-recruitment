@@ -1,13 +1,14 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { Suspense, useEffect } from "react";
+
 import { MaterialsList } from "@/components/dashboard/materials-list";
 import { MaterialsSkeleton } from "@/components/dashboard/materials-skeleton";
-import { LoadingIcon } from "@/components/ui/custom/loading";
-import { useAuth } from "@/lib/auth-context";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { LoadingIcon, SearchInput } from "@/components/ui/custom";
 
-import { Suspense } from "react";
+import { FilterSections } from "@/components/dashboard/filter-sections";
+import { useAuth } from "@/lib/auth-context";
 
 export default function Dashboard() {
   const { user, status } = useAuth();
@@ -32,13 +33,17 @@ export default function Dashboard() {
   return (
     <div className="container mx-auto py-6">
       <div className="border-none shadow-none space-y-8">
-        <div className="space-y-2">
-          <h1 className="text-4xl font-semibold leading-none tracking-tight font-ubuntu">
-            Materials Dashboard
-          </h1>
-          <p className="text-lg text-muted-foreground font-montserrat">
-            Browse through our collection of materials
-          </p>
+        <div className="flex items-center justify-between">
+          <div className="space-y-2">
+            <h1 className="text-4xl font-semibold leading-none tracking-tight font-ubuntu">
+              Materials Dashboard
+            </h1>
+            <p className="text-lg text-muted-foreground font-montserrat">
+              Browse through our collection of materials
+            </p>
+          </div>
+
+          <FilterSections />
         </div>
 
         <div>

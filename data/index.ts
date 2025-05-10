@@ -1,4 +1,4 @@
-const categoryList = [
+export const categoryList = [
   {
     Id: 6283,
     Title: "Earbuds",

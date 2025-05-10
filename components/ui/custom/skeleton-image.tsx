@@ -1,6 +1,7 @@
 "use client";
 
 import notFoundImg from "@/assets/no-image.jpg";
+import { AnimatePresence, motion } from "motion/react";
 import Image, { ImageProps } from "next/image";
 import { useState } from "react";
 
@@ -16,9 +17,17 @@ export default function SkeletonImage({
 
   return (
     <div className={`relative ${className}`} style={{ width, height }}>
-      {!loaded && (
-        <div className="absolute inset-0 animate-pulse bg-gray-300 rounded" />
-      )}
+      <AnimatePresence>
+        {!loaded && (
+          <motion.div
+            className="absolute inset-0 animate-pulse bg-gray-300 rounded"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          />
+        )}
+      </AnimatePresence>
       <Image
         src={src}
         alt={alt}
