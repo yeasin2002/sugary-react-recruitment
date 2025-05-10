@@ -11,7 +11,6 @@ export function MaterialCard({ material }: { material: Material }) {
   const fullStars = Math.floor(rating);
   const hasHalfStar = rating % 1 !== 0;
 
-  // Format price with commas for thousands
   const formattedPrice = new Intl.NumberFormat("en-US", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,

@@ -1,6 +1,7 @@
 "use client";
 
 import { MaterialsList } from "@/components/dashboard/materials-list";
+import { MaterialsSkeleton } from "@/components/dashboard/materials-skeleton";
 import { LoadingIcon } from "@/components/ui/custom/loading";
 import { useAuth } from "@/lib/auth-context";
 import { useRouter } from "next/navigation";
@@ -18,8 +19,10 @@ export default function Dashboard() {
 
   if (status === "loading") {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">
+        {Array.from({ length: 12 }).map((_, index) => (
+          <MaterialsSkeleton key={index} />
+        ))}
       </div>
     );
   }
@@ -41,8 +44,8 @@ export default function Dashboard() {
         <div>
           <Suspense
             fallback={
-              <p>
-                <span>Loading... </span>
+              <p className="animate-pulse text-black dark:text-white">
+                <span>Loading...</span>
                 <LoadingIcon />
               </p>
             }

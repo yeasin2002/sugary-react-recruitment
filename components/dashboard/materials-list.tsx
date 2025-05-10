@@ -2,6 +2,7 @@
 
 import { fetchMaterials } from "@/helper/fetch-materials";
 import type { Material } from "@/lib/types";
+import { AnimatePresence } from "motion/react";
 import { useCallback, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { MaterialCard } from "./material-card";
@@ -58,13 +59,15 @@ export function MaterialsList() {
         ))}
       </div>
 
-      {isLoading && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">
-          {Array.from({ length: limit }).map((_, index) => (
-            <MaterialsSkeleton key={index} />
-          ))}
-        </div>
-      )}
+      <AnimatePresence>
+        {isLoading && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">
+            {Array.from({ length: limit }).map((_, index) => (
+              <MaterialsSkeleton key={index} />
+            ))}
+          </div>
+        )}
+      </AnimatePresence>
 
       {!isLoading && hasMore && <div ref={ref} className="h-10" />}
 
