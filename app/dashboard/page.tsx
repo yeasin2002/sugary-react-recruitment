@@ -1,18 +1,21 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 import { MaterialsList } from "@/components/dashboard/materials-list";
 import { MaterialsSkeleton } from "@/components/dashboard/materials-skeleton";
 import { LoadingIcon, SearchInput } from "@/components/ui/custom";
 
-import { FilterSections } from "@/components/dashboard/filter-sections";
+import useDebounce from "@/hooks/use-debounce";
 import { useAuth } from "@/lib/auth-context";
 
 export default function Dashboard() {
   const { user, status } = useAuth();
   const router = useRouter();
+
+  const [searchValue, setSearchValue] = useState("");
+  const debouncedSearchValue = useDebounce(searchValue, 500);
 
   useEffect(() => {
     if (status === "unauthenticated") router.push("/login");
@@ -43,7 +46,12 @@ export default function Dashboard() {
             </p>
           </div>
 
-          <FilterSections />
+          <SearchInput
+            placeholder="Search..."
+            type="search"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
         </div>
 
         <div>
@@ -55,7 +63,7 @@ export default function Dashboard() {
               </p>
             }
           >
-            <MaterialsList />
+            <MaterialsList searchValue={debouncedSearchValue} />
           </Suspense>
         </div>
       </div>

@@ -28,7 +28,7 @@ export function MaterialCard({ material }: { material: Material }) {
           alt={material.Title}
           width={500}
           height={500}
-          className={`object-cover  duration-700 group-hover:scale-110 transition-all h-80`}
+          className={`object-cover  duration-700 group-hover:scale-110 transition-all `}
         />
         <div className="absolute top-3 right-3 bg-black/70 text-white px-3 py-1 rounded-full text-sm font-medium">
           {material.BrandName}
