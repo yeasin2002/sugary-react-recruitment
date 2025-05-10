@@ -16,11 +16,11 @@ export function MaterialsSkeleton({ count = 8 }: MaterialsSkeletonProps) {
           key={index}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.2, delay: index * 0.1 }}
+          transition={{ duration: 0.2 }}
           exit={{ opacity: 0 }}
         >
           <Card className="overflow-hidden">
-            <Skeleton className="h-48 w-full" />
+            <Skeleton className="h-80 w-full" />
             <CardContent className="p-4">
               <div className="space-y-2">
                 <Skeleton className="h-4 w-3/4" />

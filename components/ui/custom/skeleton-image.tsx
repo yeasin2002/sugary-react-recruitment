@@ -1,5 +1,6 @@
 "use client";
 
+import notFoundImg from "@/assets/no-image.jpg";
 import Image, { ImageProps } from "next/image";
 import { useState } from "react";
 
@@ -27,6 +28,10 @@ export default function SkeletonImage({
           loaded ? "opacity-100" : "opacity-0"
         }`}
         onLoad={() => setLoaded(true)}
+        onError={(e) => {
+          setLoaded(false);
+          e.currentTarget.src = notFoundImg.src;
+        }}
         {...props}
       />
     </div>

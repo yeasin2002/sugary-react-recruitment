@@ -57,25 +57,16 @@ export function MaterialsList() {
         {materials.map((material) => (
           <MaterialCard key={material.Id} material={material} />
         ))}
-      </div>
 
-      <AnimatePresence>
-        {isLoading && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">
-            {Array.from({ length: limit }).map((_, index) => (
+        <AnimatePresence>
+          {isLoading &&
+            Array.from({ length: limit }).map((_, index) => (
               <MaterialsSkeleton key={index} />
             ))}
-          </div>
-        )}
-      </AnimatePresence>
+        </AnimatePresence>
+      </div>
 
       {!isLoading && hasMore && <div ref={ref} className="h-10" />}
-
-      {!hasMore && materials.length > 0 && (
-        <div className="text-center my-8 text-gray-500">
-          No more materials to load
-        </div>
-      )}
     </div>
   );
 }
