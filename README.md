@@ -2,19 +2,19 @@
 
 This is a frontend recruitment task completed using **Next.js** (React framework), as part of the application process for a frontend developer role at **Sugary**.
 
-Live: [sugary-task.vercel.app](https://sugary-task.vercel.app)  
-Repo: [github.com/yourusername/sugary-react-recruitment](https://github.com/yourusername/sugary-react-recruitment)
+Live: [sugary-task.vercel.app](sugary-task.vercel.app)  
+
+
+
+
+<img src="./public/cover.png" />
 
 ---
 
 ## 🚀 Tech Stack
 
-- **Next.js 14** — App Router, SSR support
-- **Tailwind CSS** — Fast and modern styling
-- **Axios** — API requests with token refresh handling
-- **JWT Auth** — Secure token-based auth
-- **React Query / SWR** _(optional)_ — For efficient data fetching & caching
-- **Lazy Loading** — Infinite scroll for Material list
+<img src="https://go-skill-icons.vercel.app/api/icons?i=react,next,tailwindcss" />
+
 
 ---
 
@@ -60,7 +60,7 @@ Repo: [github.com/yourusername/sugary-react-recruitment](https://github.com/your
 ## 🛠️ How to Run Locally
 
 ```bash
-git clone https://github.com/yourusername/sugary-react-recruitment
+git clone https://github.com/yeasin2002/sugary-react-recruitment.git
 cd sugary-react-recruitment
 npm install
 npm run dev
