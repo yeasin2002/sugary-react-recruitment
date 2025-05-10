@@ -10,7 +10,7 @@ import {
 import {
   clearAuthFromStorage,
   loginUser,
-  refreshToken,
+  refreshTokenFn,
   saveAuthToStorage,
 } from "./api";
 import { AuthStatus, User } from "./types";
@@ -58,20 +58,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         
         if (expirationDate.getTime() - now.getTime() < fiveMinutes) {
           // Token is about to expire, try to refresh it
-          refreshToken(token, storedRefreshToken)
+          refreshTokenFn(token, storedRefreshToken)
             .then((response) => {
               if (response.Success) {
                 setUser(response.User);
                 saveAuthToStorage(response);
-                setStatus('authenticated');
+                setStatus("authenticated");
               } else {
                 clearAuthFromStorage();
-                setStatus('unauthenticated');
+                setStatus("unauthenticated");
               }
             })
             .catch(() => {
               clearAuthFromStorage();
-              setStatus('unauthenticated');
+              setStatus("unauthenticated");
             });
         } else {
           // Token is still valid

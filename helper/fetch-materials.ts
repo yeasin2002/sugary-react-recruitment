@@ -1,6 +1,5 @@
+import { axiosClient } from "@/lib/axiosClient";
 import type { MaterialsResponse } from "@/types";
-
-const API_BASE_URL = "https://sugarytestapi.azurewebsites.net";
 
 export async function fetchMaterials(
   skip = 0,
@@ -15,15 +14,11 @@ export async function fetchMaterials(
   const encodedFilter = btoa(JSON.stringify(filter));
 
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/Materials/GetAll/?filter=${encodedFilter}`
-    );
+    const response = await axiosClient.get(`/Materials/GetAll`, {
+      params: { filter: encodedFilter },
+    });
 
-    if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
-    }
-
-    return await response.json();
+    return response.data;
   } catch (error) {
     console.error("Error fetching materials:", error);
     throw error;

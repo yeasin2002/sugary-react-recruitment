@@ -81,12 +81,11 @@ api.interceptors.response.use(
       isRefreshing = true;
 
       try {
+        const refreshTokenUrl =
+          "https://sugarytestapi.azurewebsites.net/Account/RefreshToken";
         const { data } = await axios.post<RefreshTokenResponse>(
-          "https://sugarytestapi.azurewebsites.net/Account/RefreshToken",
-          {
-            AccessToken: accessToken,
-            RefreshToken: refreshToken,
-          }
+          refreshTokenUrl,
+          { AccessToken: accessToken, RefreshToken: refreshToken }
         );
 
         const newAccessToken = data.AccessToken;
@@ -112,4 +111,4 @@ api.interceptors.response.use(
   }
 );
 
-export default api;
+export { api as axiosClient };
