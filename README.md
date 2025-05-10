@@ -2,10 +2,7 @@
 
 This is a frontend recruitment task completed using **Next.js** (React framework), as part of the application process for a frontend developer role at **Sugary**.
 
-Live: [sugary-task.vercel.app](https://sugary-task.vercel.app/)  
-
-
-
+Live: <a href="https://sugary-task.vercel.app/" target="_blank"> sugary-task.vercel.app/</a>
 
 <img src="./public/cover.png" />
 
@@ -13,8 +10,7 @@ Live: [sugary-task.vercel.app](https://sugary-task.vercel.app/)
 
 ## 🚀 Tech Stack
 
-<img src="https://go-skill-icons.vercel.app/api/icons?i=react,next,tailwindcss" />
-
+<img src="https://go-skill-icons.vercel.app/api/icons?i=react,next,tailwindcss"  style="border-radius: 4px;"/>
 
 ---
 
