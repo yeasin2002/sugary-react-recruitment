@@ -2,7 +2,7 @@
 
 This is a frontend recruitment task completed using **Next.js** (React framework), as part of the application process for a frontend developer role at **Sugary**.
 
-Live: [sugary-task.vercel.app](sugary-task.vercel.app)  
+Live: [sugary-task.vercel.app](https://sugary-task.vercel.app/)  
 
 
 
