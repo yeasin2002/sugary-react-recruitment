@@ -63,8 +63,8 @@ export default function UserProfile() {
             </Avatar>
           </div>
         </div>
-        <div className="w-1/2 bg-white p-12 flex items-center ">
-          <Card className="w-full border-none shadow-none">
+        <div className="w-1/2  p-12 flex items-center ">
+          <Card className="w-full border-none shadow-none ">
             <CardContent className="p-0 space-y-10">
               {/* Name section */}
               <div className="space-y-1">

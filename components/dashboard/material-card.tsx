@@ -1,7 +1,10 @@
+"use client";
+
 import { getImg } from "@/lib/getImg";
 import { Material } from "@/types";
 import { Star } from "lucide-react";
-import Image from "next/image";
+import { motion } from "motion/react";
+import SkeletonImage from "../ui/custom/skeleton-image";
 
 export function MaterialCard({ material }: { material: Material }) {
   const rating = 4.5;
@@ -15,9 +18,13 @@ export function MaterialCard({ material }: { material: Material }) {
   }).format(material.SalesPrice);
 
   return (
-    <div className="max-w-sm rounded-lg overflow-hidden bg-zinc-900 text-white shadow-lg transition-all duration-300 hover:shadow-xl group">
+    <motion.div
+      className="max-w-sm rounded-lg overflow-hidden bg-zinc-900 text-white shadow-lg transition-all duration-300 hover:shadow-xl group"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
       <div className="relative h-80 w-full overflow-hidden">
-        <Image
+        <SkeletonImage
           src={getImg(material.CoverPhoto)}
           alt={material.Title}
           width={500}
@@ -52,6 +59,6 @@ export function MaterialCard({ material }: { material: Material }) {
         <p className="text-gray-400">{material.VariantTitle}</p>
         <div className="text-3xl font-bold">${formattedPrice}</div>
       </div>
-    </div>
+    </motion.div>
   );
 }
