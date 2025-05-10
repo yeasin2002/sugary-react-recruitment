@@ -51,13 +51,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           return;
         }
         
-        // Check if token is about to expire (within 5 minutes)
+        
         const expirationDate = new Date(expiresAt);
         const now = new Date();
         const fiveMinutes = 5 * 60 * 1000;
-        
+
         if (expirationDate.getTime() - now.getTime() < fiveMinutes) {
-          // Token is about to expire, try to refresh it
           refreshTokenFn(token, storedRefreshToken)
             .then((response) => {
               if (response.Success) {
@@ -76,7 +75,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         } else {
           // Token is still valid
           setUser(storedUser);
-          setStatus('authenticated');
+          setStatus("authenticated");
         }
       } catch (error) {
         console.error('Error loading user from storage:', error);

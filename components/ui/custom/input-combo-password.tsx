@@ -31,7 +31,7 @@ export const InputComboForPassword = ({
           type={showPassword ? "text" : "password"}
           placeholder="Enter your password"
           className={cn(
-            "w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-100 focus:outline-none ",
+            "w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-100 focus:outline-none text-black/90",
             { "border-red-500": error }
           )}
           {...(error && {

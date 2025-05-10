@@ -22,7 +22,7 @@ export const InputCombo = ({
       </label>
       <input
         className={cn(
-          "w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-100 focus:outline-none ",
+          "w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-100 focus:outline-none text-zinc-900",
           { "border-red-500": error }
         )}
         {...register}

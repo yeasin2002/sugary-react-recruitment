@@ -19,14 +19,14 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
               />
               <div className="absolute inset-0 z-10 p-8 md:p-12 flex flex-col justify-end bg-black/40">
                 <div className="mb-8 space-y-8">
-                  <h2 className="text-5xl md:text-4xl font-serif font-bold leading-tight mb-4">
+                  <h2 className="text-5xl md:text-4xl font-bold leading-tight mb-4 font-ubuntu">
                     The {`world's`}
                     <br />
                     first personalized
                     <br />
                     gifting app
                   </h2>
-                  <p className="text-sm md:text-base max-w-xs">
+                  <p className="text-sm md:text-base max-w-xs font-montserrat">
                     You can get everything you want if you work hard, trust the
                     process, and stick to the plan.
                   </p>

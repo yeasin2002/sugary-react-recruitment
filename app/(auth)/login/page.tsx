@@ -26,8 +26,8 @@ const LoginPage = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
-      password: "",
+      username: "react@test.com",
+      password: "playful009",
     },
   });
 
@@ -43,7 +43,6 @@ const LoginPage = () => {
 
       router.push("/dashboard");
     } catch (error) {
-      console.error("Login error:", error);
       toast({
         title: "Login failed",
         description: "Invalid credentials. Please try again.",
@@ -70,10 +69,11 @@ const LoginPage = () => {
 
   return (
     <div className="flex-grow flex flex-col justify-center max-w-xl mx-auto w-full  p-8 md:p-12 lg:py-16  ">
-      <h1 className="text-4xl md:text-5xl font-serif font-bold mb-3 text-center">
+      <h1 className="text-4xl md:text-5xl font-serif font-bold mb-3 text-center text-black/80">
         Welcome Back
       </h1>
-      <p className="text-gray-500 text-center mb-8">
+
+      <p className="text-gray-500 text-center mb-8 font-montserrat">
         Enter your email and password to access your account
       </p>
 
