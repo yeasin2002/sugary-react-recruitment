@@ -1,35 +1,24 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect } from "react";
 
 import { MaterialsList } from "@/components/dashboard/materials-list";
 import { MaterialsSkeleton } from "@/components/dashboard/materials-skeleton";
-import { LoadingIcon, SearchInput } from "@/components/ui/custom";
+import { LoadingIcon } from "@/components/ui/custom";
 
-import useDebounce from "@/hooks/use-debounce";
 import { useAuth } from "@/lib/auth-context";
 
 export default function Dashboard() {
   const { user, status } = useAuth();
   const router = useRouter();
 
-  const [searchValue, setSearchValue] = useState("");
-  const debouncedSearchValue = useDebounce(searchValue, 500);
+  // const [searchValue, setSearchValue] = useState("");
+  // const debouncedSearchValue = useDebounce(searchValue, 500);
 
   useEffect(() => {
     if (status === "unauthenticated") router.push("/login");
   }, [status, router]);
-
-  if (status === "loading") {
-    return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">
-        {Array.from({ length: 12 }).map((_, index) => (
-          <MaterialsSkeleton key={index} />
-        ))}
-      </div>
-    );
-  }
 
   if (!user) return null;
 
@@ -45,25 +34,27 @@ export default function Dashboard() {
               Browse through our collection of materials
             </p>
           </div>
-
+          {/* 
           <SearchInput
             placeholder="Search..."
             type="search"
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
           />
+          */}
         </div>
 
+        {status === "loading" && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 container mx-auto py-6">
+            {Array.from({ length: 12 }).map((_, index) => (
+              <MaterialsSkeleton key={index} />
+            ))}
+          </div>
+        )}
+
         <div>
-          <Suspense
-            fallback={
-              <p className="animate-pulse text-black dark:text-white">
-                <span>Loading...</span>
-                <LoadingIcon />
-              </p>
-            }
-          >
-            <MaterialsList searchValue={debouncedSearchValue} />
+          <Suspense fallback={`Loading...`}>
+            <MaterialsList />
           </Suspense>
         </div>
       </div>

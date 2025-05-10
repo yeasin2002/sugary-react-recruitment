@@ -1,6 +1,6 @@
 "use client";
 
-import { fetchMaterialsWithFilter } from "@/actions/fetchMaterialsWithFilters";
+import { fetchMaterials } from "@/helper/fetch-materials";
 import type { Material } from "@/lib/types";
 import { AnimatePresence } from "motion/react";
 import { useCallback, useEffect, useState } from "react";
@@ -8,7 +8,7 @@ import { useInView } from "react-intersection-observer";
 import { MaterialCard } from "./material-card";
 import { MaterialsSkeleton } from "./materials-skeleton";
 
-export function MaterialsList({ searchValue }: { searchValue: string }) {
+export function MaterialsList() {
   const [materials, setMaterials] = useState<Material[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [skip, setSkip] = useState(0);
@@ -25,16 +25,14 @@ export function MaterialsList({ searchValue }: { searchValue: string }) {
 
     setIsLoading(true);
     try {
-      const response = await fetchMaterialsWithFilter(skip, limit, searchValue);
-      console.log(response);
+      const response = await fetchMaterials(skip, limit);
 
       if (response.Materials.length === 0) {
         setHasMore(false);
         return;
       }
 
-      // setMaterials((prev) => [...prev, ...response.Materials]);
-      setMaterials(response.Materials);
+      setMaterials((prev) => [...prev, ...response.Materials]);
       setSkip((prevSkip) => prevSkip + limit);
 
       if (response.RemainingCount <= 0) {
@@ -45,18 +43,13 @@ export function MaterialsList({ searchValue }: { searchValue: string }) {
     } finally {
       setIsLoading(false);
     }
-  }, [hasMore, isLoading, searchValue, skip]);
+  }, [hasMore, isLoading, skip]);
 
   useEffect(() => {
     if (inView) {
       loadMoreMaterials();
     }
   }, [inView, loadMoreMaterials]);
-
-  useEffect(() => {
-    loadMoreMaterials();
-    console.log(`running of searchValue changed: `, searchValue);
-  }, [loadMoreMaterials, searchValue]);
 
   return (
     <div>

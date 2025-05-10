@@ -12,13 +12,7 @@ export function MaterialsSkeleton({ count = 8 }: MaterialsSkeletonProps) {
   return (
     <>
       {Array.from({ length: count }).map((_, index) => (
-        <motion.div
-          key={index}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.2 }}
-          exit={{ opacity: 0 }}
-        >
+        <div key={index}>
           <Card className="overflow-hidden">
             <Skeleton className="h-80 w-full" />
             <CardContent className="p-4">
@@ -32,7 +26,7 @@ export function MaterialsSkeleton({ count = 8 }: MaterialsSkeletonProps) {
               <Skeleton className="h-4 w-1/4" />
             </CardFooter>
           </Card>
-        </motion.div>
+        </div>
       ))}
     </>
   );
